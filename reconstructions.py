@@ -34,7 +34,7 @@ m = load_X.shape[1]
 train_indices = np.random.choice(n - lags, size=1000, replace=False)
 mask = np.ones(n - lags)
 mask[train_indices] = 0
-valid_test_indices = np.arange(0, n - lags)[mask.astype(int)]
+valid_test_indices = np.arange(0, n - lags)[np.where(mask!=0)[0]]
 valid_indices = valid_test_indices[::2]
 test_indices = valid_test_indices[1::2]
 
