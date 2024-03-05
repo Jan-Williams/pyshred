@@ -1,6 +1,7 @@
 import torch
 from torch.utils.data import DataLoader
 import numpy as np
+from copy import deepcopy
 
 class SHRED(torch.nn.Module):
     '''SHRED model accepts input size (number of sensors), output size (dimension of high-dimensional spatio-temporal state, hidden_size, number of LSTM layers,
@@ -104,7 +105,7 @@ def fit(model, train_dataset, valid_dataset, batch_size=64, num_epochs=4000, lr=
 
             if val_error == torch.min(torch.tensor(val_error_list)):
                 patience_counter = 0
-                best_params = model.state_dict()
+                best_params = deepcopy(model.state_dict())
             else:
                 patience_counter += 1
 
